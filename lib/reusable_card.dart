@@ -10,7 +10,7 @@ class ReusableCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onPressed == null ? () {} : onPressed,
+      onTap: onPressed,
       child: Container(
         margin: EdgeInsets.all(10.0),
         decoration: BoxDecoration(
