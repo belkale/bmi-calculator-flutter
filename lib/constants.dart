@@ -16,3 +16,28 @@ const kNumberTextStyle = TextStyle(
   fontSize: 50.0,
   fontWeight: FontWeight.w900,
 );
+
+const kHeavyNumberStyle = TextStyle(
+  fontSize: 25.0,
+  fontWeight: FontWeight.bold,
+);
+
+const kResultsTitleStyle = TextStyle(
+  fontSize: 50.0,
+  fontWeight: FontWeight.bold,
+);
+
+const kResultsStatusStyle = TextStyle(
+  color: Colors.green,
+  fontSize: 30.0,
+  fontWeight: FontWeight.bold,
+);
+
+const kResultsNumberStyle = TextStyle(
+  fontSize: 80.0,
+  fontWeight: FontWeight.bold,
+);
+
+const kResultsBodyStyle = TextStyle(
+  fontSize: 25.0,
+);

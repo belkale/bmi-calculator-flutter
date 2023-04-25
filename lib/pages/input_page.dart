@@ -1,9 +1,13 @@
+import 'package:bmi_calculator/calculator_brain.dart';
+import 'package:bmi_calculator/pages/results_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'constants.dart';
-import 'icon_content.dart';
-import 'reusable_card.dart';
+import '../components/bottom_button.dart';
+import '../components/icon_content.dart';
+import '../components/incr_decr_button.dart';
+import '../components/reusable_card.dart';
+import '../constants.dart';
 
 class InputPage extends StatefulWidget {
   @override
@@ -13,8 +17,10 @@ class InputPage extends StatefulWidget {
 enum Gender { male, female }
 
 class _InputPageState extends State<InputPage> {
-  Gender selectedGender;
+  Gender? selectedGender;
   int height = 180;
+  int weight = 60;
+  int age = 20;
 
   @override
   Widget build(BuildContext context) {
@@ -106,16 +112,66 @@ class _InputPageState extends State<InputPage> {
           Expanded(
             child: Row(
               children: [
-                Expanded(child: ReusableCard(color: kActiveCardColor)),
-                Expanded(child: ReusableCard(color: kActiveCardColor)),
+                Expanded(
+                  child: ReusableCard(
+                    color: kActiveCardColor,
+                    child: IncrDecrButton(
+                      label: 'WEIGHT',
+                      number: weight.toString(),
+                      onDecr: () {
+                        setState(() {
+                          if (weight > 0) {
+                            weight--;
+                          }
+                        });
+                      },
+                      onIncr: () {
+                        setState(() {
+                          weight++;
+                        });
+                      },
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: ReusableCard(
+                    color: kActiveCardColor,
+                    child: IncrDecrButton(
+                      label: 'AGE',
+                      number: age.toString(),
+                      onDecr: () {
+                        setState(() {
+                          if (age > 0) {
+                            age--;
+                          }
+                        });
+                      },
+                      onIncr: () {
+                        setState(() {
+                          age++;
+                        });
+                      },
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
-          Container(
-            height: kBottomContainerHeight,
-            width: double.infinity,
-            color: kBottomContainerColor,
-            margin: EdgeInsets.only(top: 10.0),
+          BottomButton(
+            title: 'CALCULATE',
+            onTap: () {
+              var brain = CalculatorBrain(height: height, weight: weight);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ResultsPage(
+                    bmi: brain.getBMI(),
+                    result: brain.getResult(),
+                    description: brain.getInterpretation(),
+                  ),
+                ),
+              );
+            },
           )
         ],
       ),
